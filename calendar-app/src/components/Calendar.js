@@ -1,5 +1,5 @@
 import './calendar.css';
-
+import Search from './searchsection/Search.js'
 function Calendar(props){
     let today = new Date();
     let dateformatted = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -15,7 +15,7 @@ function Calendar(props){
             </tr>
         </table>
 
-       <div>
+       {/*<div>
         {
         props.data && props.data.length>0 && props.data.map((item)=>(
             <div>
@@ -31,7 +31,9 @@ function Calendar(props){
             </div>    
             ))
         }
-        </div>
+        </div>*/}
+        
+        <Search data={props.data}></Search>
         </div>
     );
 }
