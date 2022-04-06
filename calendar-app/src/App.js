@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div>
-      <Calendar data={local_json} calendar={local_calendar} />
+      <Calendar data={api_data} calendar={api_calendars} />
     </div>
   );
 }
