@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import './style.css';
 
-export default class Calendar extends Component{
-
-
-    render(){
-        return (
-            <div>
-                Calendar component
-            </div>
-        );
-    }
+function Calendar(){
+    return (
+        <div className='title'>
+            Calendar component
+        </div>
+    );
 }
+
+export default Calendar;
