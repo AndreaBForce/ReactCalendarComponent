@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import './style.css';
+import React from 'react';
+import './calendar.css';
 
 function Calendar(){
     return (
-        <div className='title'>
-            Calendar component
-        </div>
+        <table>
+            {/* conterrà la vista per mese o per settimana */}
+            <tr>
+                <td>day 1</td>
+            </tr>
+        </table>
     );
 }
 
