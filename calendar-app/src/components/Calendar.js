@@ -1,6 +1,8 @@
+import React from 'react';
 import './calendar.css';
 import Month from './month/Month';
 import Search from './searchsection/Search.js'
+
 function Calendar(props){
     let today = new Date();
     let dateformatted = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -9,6 +11,7 @@ function Calendar(props){
         <div>
         <h1>{dateformatted}</h1>
         <h2>{props.calendar}</h2>
+        <Search data={props.data}></Search>
         <table>
             <thead className='day-label'>
                 <tr>
@@ -44,7 +47,6 @@ function Calendar(props){
         }
         </div>*/}
         
-        <Search data={props.data}></Search>
         </div>
     );
 }
