@@ -11,7 +11,7 @@ function Calendar(props){
         <div>
         <h1>{dateformatted}</h1>
         <h2>{props.calendar}</h2>
-        <Search data={props.data}></Search>
+        <Search data={props.data} search={props.search}></Search>
         <table>
             <thead className='day-label'>
                 <tr>

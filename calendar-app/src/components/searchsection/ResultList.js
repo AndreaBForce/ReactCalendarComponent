@@ -2,23 +2,10 @@ import './search.css';
 import React, {useState} from 'react';
 
 function ResultList(props){
-    
-    const filteredData = props.data.filter((element) => {
-        //if no input the return the original
-        if (props.input === '') {
-            return false;
-        }
-        //return the item which contains the user input
-        else {
-            return (element.title.toLowerCase().includes(props.input.toLowerCase()) || element.description.toLowerCase().includes(props.input.toLowerCase()))
-        }
-    })
-
-
     return(
         <div>
             {
-            filteredData.map((item)=>(
+            props.data.map((item)=>(
             <div key={item.id}>
                 <p>---------------------</p>
                 <p>{item.id}</p>

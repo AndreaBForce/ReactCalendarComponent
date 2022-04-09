@@ -10,6 +10,7 @@ function App() {
 
   const [api_data,setData]=useState([]);
   const [api_calendars,setCalendars]=useState([]);
+  const api_search = 'https://supsi-events.herokuapp.com/bff/events?search=';
 
   //Funzione generale che legge i dati dalle richieste
   const getData=(url,setX)=>{
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <div>
-      <Calendar data={api_data} calendar={api_calendars} />
+      <Calendar data={api_data} calendar={api_calendars} search={api_search} />
     </div>
   );
 }
