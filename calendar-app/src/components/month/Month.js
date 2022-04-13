@@ -2,7 +2,7 @@ import React from 'react';
 import "./month.css";
 import Week from '../week/Week';
 
-function Month(){
+function Month(props){
 
     let today = new Date(2022, 5, 4);
     let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -18,7 +18,7 @@ function Month(){
     }
 
     return (
-        weeksDays.map( (wd) => <Week weekDay={wd} key={wd.getDate()} /> )
+        weeksDays.map( (wd) => <Week weekDay={wd} key={wd.getDate()} data={props.data} /> )
     );
 }
 

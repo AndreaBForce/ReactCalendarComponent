@@ -37,7 +37,7 @@ function Search(props){
         <div>
             <h1>SEARCH BAR SECTION</h1>
             <input placeholder="Search" onChange={event => search_items(event.target.value)}/>   
-            <ResultList input={query} data={filterData} ></ResultList>
+            <ResultList data={filterData} ></ResultList>
         </div>
     );
 }

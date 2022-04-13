@@ -7,7 +7,22 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 
 function Day(props){
     
-    let day = <td className='day-border'>{props.num.getDate()}</td>;
+    let day = <td className='day-border'>
+        <div>
+            {props.num.getDate()}
+            <div>
+                {props.daydata.map((item)=>(
+                <div key={item.id}>
+                    <p>---------------------</p>
+                    <p>{item.title}</p>
+                    <p>{item.calendar}</p>
+                    <p>{item.date}</p>
+                    <p>---------------------</p>
+                </div>    
+            ))}
+            </div>
+        </div>
+    </td>;
 
     if(props.num.getDate() == 1){
         console.log(props.num.getMonth())
