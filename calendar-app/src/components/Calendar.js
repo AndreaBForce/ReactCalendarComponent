@@ -14,9 +14,11 @@ function Calendar(props){
     let today = new Date();
     let dateformatted = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
-
+    useEffect(()=>{
+        setFilteredData(props.data);
+    },[props.data])
     
-
+    
     const handleCheckboxChange = (item) => {
         console.log(item)
 
