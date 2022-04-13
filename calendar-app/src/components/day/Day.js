@@ -1,17 +1,17 @@
 import React from 'react';
 import "./day.css";
 
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
 function Day(props){
     
-    let day = <td className='day-border'>{props.num.getDate()}</td>;
+    let day = <td className='day-border'>
+                <div className='day-content'>
+                    <span className='day-number'>{props.num.getDate()}</span>
+                </div>
+            </td>;
 
     if(props.num.getDate() == 1){
-        console.log(props.num.getMonth())
-        day = <td className='day-border'>{props.num.getDate()} {monthNames[props.num.getMonth()]}</td>;
+        let monthName = props.num.toLocaleString('en-EN', {month: 'short'});
+        day = <td className='day-border'><div className='day-content'><span className='day-number'>{props.num.getDate()} {monthName}</span></div></td>;
     }
     
 

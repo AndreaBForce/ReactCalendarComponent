@@ -11,7 +11,7 @@ function Month(){
 
     let weeksDays = [];
     let first = 0;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         firstDay.setDate(firstDay.getDate()+7*first);
         weeksDays[i] = new Date(firstDay);
         first = 1;
