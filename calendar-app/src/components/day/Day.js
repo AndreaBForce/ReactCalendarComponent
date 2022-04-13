@@ -2,18 +2,24 @@ import React from 'react';
 import "./day.css";
 
 function Day(props){
-    
-    let day = <td className='day-border'>
-                <div className='day-content'>
-                    <span className='day-number'>{props.num.getDate()}</span>
-                </div>
-            </td>;
 
-    if(props.num.getDate() == 1){
-        let monthName = props.num.toLocaleString('en-EN', {month: 'short'});
-        day = <td className='day-border'><div className='day-content'><span className='day-number'>{props.num.getDate()} {monthName}</span></div></td>;
+    Date.prototype.compare = function(d) {
+        return this.getFullYear() === d.getFullYear()
+          && this.getDate() === d.getDate()
+          && this.getMonth() === d.getMonth();
     }
     
+    let monthName = props.day.getDate() === 1? props.day.toLocaleString('en-EN', {month: 'short'}):"";
+
+    let today = new Date();
+    let actualDay = new Date(props.day);
+    let todayClass = actualDay.compare(today)?'today':'';
+
+    let day = <td className='day-border'>
+                <div className='day-content'>
+                    <span className={`day-number ${todayClass}`}>{props.day.getDate()} {monthName}</span>
+                </div>
+            </td>;
 
     return(
         day

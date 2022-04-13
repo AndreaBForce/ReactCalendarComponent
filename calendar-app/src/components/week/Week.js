@@ -16,7 +16,7 @@ function Week(props){
 
     return(
         <tr>
-            {days.map( (d) => <Day num={d} key={d} /> )}
+            {days.map( (d) => <Day day={d} key={d} /> )}
         </tr>
     );
 }

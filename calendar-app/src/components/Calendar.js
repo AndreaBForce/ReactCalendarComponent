@@ -4,8 +4,8 @@ import Month from './month/Month';
 import Search from './searchsection/Search.js'
 
 function Calendar(props){
-    let today = new Date();
-    let monthTextual = today.toLocaleString('en-EN', {month: 'long', year: 'numeric'});
+    let actualDay = new Date();
+    let monthTextual = actualDay.toLocaleString('en-EN', {month: 'long', year: 'numeric'});
     
     return (
         <div className='calendar-container'>
@@ -17,17 +17,17 @@ function Calendar(props){
                 <table>
                     <thead className='day-label'>
                         <tr>
-                            <td>Mon</td>
-                            <td>Tue</td>
-                            <td>Wed</td>
-                            <td>Thu</td>
-                            <td>Fri</td>
-                            <td>Sat</td>
-                            <td>Sun</td>
+                            <td>mon</td>
+                            <td>tue</td>
+                            <td>wed</td>
+                            <td>thu</td>
+                            <td>fri</td>
+                            <td>sat</td>
+                            <td>sun</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <Month />
+                        <Month actualDay={actualDay}/>
                     </tbody>
                 </table>
             </div>

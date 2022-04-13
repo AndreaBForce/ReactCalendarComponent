@@ -2,10 +2,10 @@ import React from 'react';
 import "./month.css";
 import Week from '../week/Week';
 
-function Month(){
+function Month(props){
 
-    let today = new Date(2022, 5, 4);
-    let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    // let today = new Date(2022, 5, 4);
+    let firstDay = new Date(props.actualDay.getFullYear(), props.actualDay.getMonth(), 1);
 
     firstDay.setDate(-firstDay.getUTCDay()+1);
 
