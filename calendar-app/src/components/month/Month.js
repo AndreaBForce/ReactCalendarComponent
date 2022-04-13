@@ -4,7 +4,6 @@ import Week from '../week/Week';
 
 function Month(props){
 
-    // let today = new Date(2022, 5, 4);
     let firstDay = new Date(props.actualDay.getFullYear(), props.actualDay.getMonth(), 1);
 
     firstDay.setDate(-firstDay.getUTCDay()+1);
@@ -18,7 +17,7 @@ function Month(props){
     }
 
     return (
-        weeksDays.map( (wd) => <Week weekDay={wd} key={wd.getDate()} /> )
+        weeksDays.map( (wd) => <Week weekDay={wd} actualDay={props.actualDay} key={wd.getTime()} /> )
     );
 }
 

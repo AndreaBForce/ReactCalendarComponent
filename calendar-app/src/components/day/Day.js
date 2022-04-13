@@ -12,12 +12,12 @@ function Day(props){
     let monthName = props.day.getDate() === 1? props.day.toLocaleString('en-EN', {month: 'short'}):"";
 
     let today = new Date();
-    let actualDay = new Date(props.day);
-    let todayClass = actualDay.compare(today)?'today':'';
+    let todayClass = props.day.compare(today)?'today':'';
+    let thisMonthClass = props.day.getMonth() === props.actualDay.getMonth()?'':'text-opaque';
 
     let day = <td className='day-border'>
                 <div className='day-content'>
-                    <span className={`day-number ${todayClass}`}>{props.day.getDate()} {monthName}</span>
+                    <span className={`day-number ${todayClass} ${thisMonthClass}`}>{props.day.getDate()} {monthName}</span>
                 </div>
             </td>;
 

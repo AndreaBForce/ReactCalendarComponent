@@ -18,6 +18,10 @@
     padding: 4px;
 }
 
+.text-opaque{
+    color: rgb(130, 130, 130);
+}
+
 .today{
     background: red;
     border-radius: 20px;
