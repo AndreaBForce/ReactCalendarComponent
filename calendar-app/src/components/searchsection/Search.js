@@ -2,6 +2,7 @@ import './search.css';
 import ResultList from './ResultList';
 import React, {useState} from 'react';
 
+//TODO FIXARE LA SEARCH RICHIESTE SOSPESE PER IL ROBO
 function Search(props){
     const [query, setQuery] = useState("");
     const [filterData,setFilterData] = useState([]);
