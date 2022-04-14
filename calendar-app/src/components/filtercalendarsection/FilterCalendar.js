@@ -8,12 +8,12 @@ function FilterCalendar(props){
             <h1>FILTER CALENDAR SECTION</h1>
             <div>
             {
-            props.calendars.map((item)=>(
+            /*props.calendars.map((item)=>(
                 <div>
-                    <input type="checkbox" value={item} onChange={()=> props.onHandleChange(item)} defaultChecked></input>
-                    <label>{item}</label>
+                    <input type="checkbox" value={item.name} onChange={()=> props.onHandleChange(item.name)} defaultChecked></input>
+                    <label>{item.name}</label>
                 </div>
-            ))
+            ))*/
             }
             </div>
         </div>

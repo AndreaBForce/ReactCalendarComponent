@@ -5,18 +5,34 @@ import Month from './month/Month';
 import Search from './searchsection/Search.js'
 
 function Calendar(props){
-    const [checkedState, setCheckedState] = useState(
-        new Array(props.calendar.length).fill(true)
-      );
     
-    const [filteredData,setFilteredData] = useState(props.data);
+    //Dati eventi e calendari
+    const [filteredData,setFilteredData] = useState([]);
+    const [calendars,setCalendars]=useState([]);
 
     let today = new Date();
     let dateformatted = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
+
+    const getData=(url,setX)=>{
+        fetch(url).then(function(response){
+            return response.json();
+          })
+          .then(function(myJson) {
+            setX(myJson)
+          });
+      }
+
+    //Uso per inizializzare i dati del calendario, controllo se da API o da locale
     useEffect(()=>{
-        setFilteredData(props.data);
-    },[props.data])
+        if(props.url_data !== undefined && props.url_calendars !== undefined){
+            getData(props.url_data,setFilteredData);
+            getData(props.url_calendars,setCalendars)
+        }else if(props.data !== undefined && props.calendar){
+            setFilteredData(props.data);
+            setCalendars(props.calendars);
+        }
+    },[])
     
     
     const handleCheckboxChange = (item) => {
@@ -29,9 +45,9 @@ function Calendar(props){
     return (
         <div>
         <h1>{dateformatted}</h1>
-        <h2>{props.calendar}</h2>
+        
         <Search data={filteredData} search={props.search}></Search>
-        <FilterCalendar calendars={props.calendar} onHandleChange={handleCheckboxChange}></FilterCalendar>
+        <FilterCalendar calendars={calendars} onHandleChange={handleCheckboxChange}></FilterCalendar>
         <table>
             <thead className='day-label'>
                 <tr>
