@@ -7,8 +7,10 @@ import Search from './searchsection/Search.js'
 function Calendar(props){
     
     //Dati eventi e calendari
-    const [filteredData,setFilteredData] = useState([]);
-    const [calendars,setCalendars]=useState([]);
+    const [totalData, setTotalData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
+    const [calendars, setCalendars]=useState([]);
+    const [selectedItems, setSelectedItems]=useState([]);
 
     let today = new Date();
     let dateformatted = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -27,20 +29,40 @@ function Calendar(props){
     useEffect(()=>{
         if(props.url_data !== undefined && props.url_calendars !== undefined){
             getData(props.url_data,setFilteredData);
+            getData(props.url_data,setTotalData);
             getData(props.url_calendars,setCalendars)
         }else if(props.data !== undefined && props.calendar){
             setFilteredData(props.data);
+            setTotalData(props.data);
             setCalendars(props.calendars);
         }
     },[])
     
-    
-    const handleCheckboxChange = (item) => {
-        console.log(item)
 
-        setFilteredData(props.data.filter((element) => element.calendar.includes(item)));
+    //Gestisce il click delle checkbox del calendario 
+    //TODO MIGLIORARE CON OGGETTI
+    const handleCheckboxChange = (item) => {
         
-    }   
+        if(selectedItems.includes(item)){
+            //Rimuove l'item nel selected Items
+            setSelectedItems(selectedItems.filter((element) => element !== item));
+        }else{
+            //Inserisce l'item nel selected items
+            setSelectedItems(selectedItems => [...selectedItems,item] );
+        }
+    }  
+
+    //Questo use effect, viene chiamato ogni volta che viene chiamato il set selected Items
+    useEffect(()=>{
+        let temp_data = totalData;
+
+        //Cicla su ogni calendario e filtra per ogni evento
+        //TODO MIGLIORARE CON OGGETTI
+        selectedItems.forEach((element)=>{
+            temp_data = temp_data.filter((event_event)=> event_event.calendar != element);
+        });
+        setFilteredData(temp_data);
+    },[selectedItems])
 
     return (
         <div>

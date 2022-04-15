@@ -25,7 +25,7 @@ function Day(props){
     </td>;
 
     if(props.num.getDate() == 1){
-        console.log(props.num.getMonth())
+        //console.log(props.num.getMonth())
         day = <td className='day-border'>{props.num.getDate()} {monthNames[props.num.getMonth()]}</td>;
     }
     
