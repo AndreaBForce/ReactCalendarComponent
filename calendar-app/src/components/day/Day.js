@@ -6,13 +6,22 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 function Day(props){
+
     
+    let clickedAction = (item) =>{
+        console.log("default calendar click")
+    }
+
+    if(props.clickHandler != undefined){
+        clickedAction = props.clickHandler;    
+    }
+
     let day = <td className='day-border'>
         <div>
             {props.num.getDate()}
             <div>
                 {props.daydata.map((item)=>(
-                <div key={item.id}>
+                <div key={item.id} onClick={() => clickedAction(item)}>
                     <p>---------------------</p>
                     <p>{item.title}</p>
                     <p>{item.calendar}</p>

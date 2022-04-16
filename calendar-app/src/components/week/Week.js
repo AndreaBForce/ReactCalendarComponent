@@ -32,7 +32,7 @@ function Week(props){
                 props.data.filter((element)=>{
                     console.log() 
                     return  compareDate(element.date).getTime() == d.getTime();
-                })} /> )}
+                })} clickHandler={props.clickHandler}/> )}
         </tr>
     );
 }

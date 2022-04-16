@@ -18,7 +18,7 @@ function Month(props){
     }
 
     return (
-        weeksDays.map( (wd) => <Week weekDay={wd} key={wd.getDate()} data={props.data} /> )
+        weeksDays.map( (wd) => <Week weekDay={wd} key={wd.getDate()} data={props.data} clickHandler={props.clickHandler}/> )
     );
 }
 

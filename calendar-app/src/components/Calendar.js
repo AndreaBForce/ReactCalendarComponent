@@ -83,7 +83,7 @@ function Calendar(props){
                 </tr>
             </thead>
             <tbody>
-                <Month data={filteredData}/>
+                <Month data={filteredData} clickHandler={props.clickHandler}/>
             </tbody>
         </table>
                 
