@@ -8,10 +8,19 @@ table{
     width: 100%;
     min-width: 500px;
     height: 80vh;
+    /* table-layout: fixed;
+    display: table; */
 }
 
 thead{
     text-align: center;
+}
+
+tbody{
+    /* display: block; */
+    overflow-y: auto;
+    height: 300px;
+    /* width: 462%; */
 }
 
 .calendar-container{

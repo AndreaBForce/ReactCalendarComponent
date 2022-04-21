@@ -17,7 +17,22 @@ function Month(props){
     }
 
     return (
-        weeksDays.map( (wd) => <Week weekDay={wd} actualDay={props.actualDay} key={wd.getTime()} /> )
+        <table>
+            <thead className='day-label'>
+                <tr>
+                    <td>mon</td>
+                    <td>tue</td>
+                    <td>wed</td>
+                    <td>thu</td>
+                    <td>fri</td>
+                    <td>sat</td>
+                    <td>sun</td>
+                </tr>
+            </thead>
+            <tbody>
+                {weeksDays.map( (wd) => <Week weekDay={wd} actualDay={props.actualDay} key={wd.getTime()} /> )}
+            </tbody>
+        </table>
     );
 }
 

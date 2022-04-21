@@ -15,7 +15,7 @@ function Day(props){
     let todayClass = props.day.compare(today)?'today':'';
     let thisMonthClass = props.day.getMonth() === props.actualDay.getMonth()?'':'text-opaque';
 
-    let day = <td className='day-border'>
+    let day = <td className='day-border day-td-cell'>
                 <div className='day-content'>
                     <span className={`day-number ${todayClass} ${thisMonthClass}`}>{props.day.getDate()} {monthName}</span>
                 </div>
