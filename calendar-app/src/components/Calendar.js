@@ -14,25 +14,24 @@ function Calendar(props){
     const [selectedItems, setSelectedItems]=useState([]);
 
     let today = new Date();
-    let dateformatted = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    
+
     const [actualDay, setActualDay] = useState(new Date());
-    const [monthView, setMonthView] = useState(false);
+    const [monthView, setMonthView] = useState(true);
 
     function handleNextBtn(){
         setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()+1, 1));
-        console.log("next "+actualDay);
     }
 
     function handlePrevBtn(){
         setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()-1, 1));
     }
 
-    // let actualDay = new Date();
+    
     let monthTextual = actualDay.toLocaleString('en-EN', {month: 'long', year: 'numeric'}).toLowerCase();
     let view;
+
     if (monthView) {
-        view = <Month actualDay={actualDay} />;
+        view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }else{
         view = <WeekView actualDay={actualDay} />;
     }
@@ -47,6 +46,7 @@ function Calendar(props){
       }
 
     //Uso per inizializzare i dati del calendario, controllo se da API o da locale
+    //TODO: Testare il case se il socio ne mette uno dei due e basta
     useEffect(()=>{
         if(props.url_data !== undefined && props.url_calendars !== undefined){
             getData(props.url_data,setFilteredData);
@@ -61,7 +61,7 @@ function Calendar(props){
     
 
     //Gestisce il click delle checkbox del calendario 
-    //TODO MIGLIORARE CON OGGETTI
+    //Filtra gli elementi presenti che verranno mostrati o meno
     const handleCheckboxChange = (item) => {
         
         if(selectedItems.includes(item)){
@@ -88,7 +88,7 @@ function Calendar(props){
     return (
         <div className='calendar-container'>
             <div className='filter-container'>
-                {/* {props.calendar.map( (c) => <p>{c}</p>)} */}
+                <FilterCalendar calendars={calendars} onHandleChange={handleCheckboxChange}></FilterCalendar>
             </div>
             <div className='view-container'>
                 <div className='view-header'>
@@ -110,7 +110,7 @@ function Calendar(props){
                 </div>
             </div>
             <div className='search-container'>
-                <Search data={props.data} search={props.search}></Search>
+                <Search data={filteredData} search={props.search}></Search>
             </div>
         </div>
     );

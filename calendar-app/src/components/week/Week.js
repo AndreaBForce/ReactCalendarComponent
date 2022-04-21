@@ -27,12 +27,12 @@ function Week(props){
 
     return(
         <tr>
-            {days.map( (d) => <Day num={d} key={d} 
+            {days.map( (d) => <Day day={d} key={d.getTime()} actualDay={props.actualDay}
             daydata={
                 props.data.filter((element)=>{
                     console.log() 
                     return  compareDate(element.date).getTime() == d.getTime();
-                })} clickHandler={props.clickHandler}/> )}
+                })} clickHandler={props.clickHandler} calendars={props.calendars}/> )}
         </tr>
     );
 }

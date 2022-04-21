@@ -12,9 +12,10 @@ function Day(props){
         return this.getFullYear() === d.getFullYear()
           && this.getDate() === d.getDate()
           && this.getMonth() === d.getMonth();
+    }
+
     if(props.clickHandler != undefined){
         clickedAction = props.clickHandler;    
-    }
     }
     
     let monthName = props.day.getDate() === 1? props.day.toLocaleString('en-EN', {month: 'short'}):"";
@@ -26,6 +27,11 @@ function Day(props){
     let day = <td className='day-border day-td-cell'>
                 <div className='day-content'>
                     <span className={`day-number ${todayClass} ${thisMonthClass}`}>{props.day.getDate()} {monthName}</span>
+                    {
+                        props.daydata.map((item,id)=>(
+                            <div key={id} onClick={() => clickedAction(item)} >{item.title}</div>
+                        ))
+                    }
                 </div>
             </td>;
 

@@ -5,7 +5,7 @@ function FilterCalendar(props){
     
     return(
         <div>
-            <h1>FILTER CALENDAR SECTION</h1>
+            <h3>Calendars</h3>
             <div>
             {
             props.calendars.map((item, id)=>(

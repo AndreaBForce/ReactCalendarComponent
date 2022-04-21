@@ -30,7 +30,7 @@ function Month(props){
                 </tr>
             </thead>
             <tbody>
-                {weeksDays.map( (wd) => <Week weekDay={wd} actualDay={props.actualDay} key={wd.getTime()} /> )}
+                {weeksDays.map( (wd) => <Week weekDay={wd} actualDay={props.actualDay} key={wd.getTime()} data={props.data} clickHandler={props.clickHandler} calendars={props.calendars}/> )}
             </tbody>
         </table>
     );
