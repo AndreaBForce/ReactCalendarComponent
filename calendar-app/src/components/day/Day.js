@@ -1,10 +1,6 @@
 import React from 'react';
 import "./day.css";
 
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
 function Day(props){
 
     
@@ -12,32 +8,26 @@ function Day(props){
         console.log("default calendar click")
     }
 
+    Date.prototype.compare = function(d) {
+        return this.getFullYear() === d.getFullYear()
+          && this.getDate() === d.getDate()
+          && this.getMonth() === d.getMonth();
     if(props.clickHandler != undefined){
         clickedAction = props.clickHandler;    
     }
-
-    let day = <td className='day-border'>
-        <div>
-            {props.num.getDate()}
-            <div>
-                {props.daydata.map((item)=>(
-                <div key={item.id} onClick={() => clickedAction(item)}>
-                    <p>---------------------</p>
-                    <p>{item.title}</p>
-                    <p>{item.calendar}</p>
-                    <p>{item.date}</p>
-                    <p>---------------------</p>
-                </div>    
-            ))}
-            </div>
-        </div>
-    </td>;
-
-    if(props.num.getDate() == 1){
-        //console.log(props.num.getMonth())
-        day = <td className='day-border'>{props.num.getDate()} {monthNames[props.num.getMonth()]}</td>;
     }
     
+    let monthName = props.day.getDate() === 1? props.day.toLocaleString('en-EN', {month: 'short'}):"";
+
+    let today = new Date();
+    let todayClass = props.day.compare(today)?'today':'';
+    let thisMonthClass = props.day.getMonth() === props.actualDay.getMonth()?'':'text-opaque';
+
+    let day = <td className='day-border day-td-cell'>
+                <div className='day-content'>
+                    <span className={`day-number ${todayClass} ${thisMonthClass}`}>{props.day.getDate()} {monthName}</span>
+                </div>
+            </td>;
 
     return(
         day

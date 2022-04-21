@@ -4,21 +4,35 @@ import Week from '../week/Week';
 
 function Month(props){
 
-    let today = new Date(2022, 5, 4);
-    let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    let firstDay = new Date(props.actualDay.getFullYear(), props.actualDay.getMonth(), 1);
 
     firstDay.setDate(-firstDay.getUTCDay()+1);
 
     let weeksDays = [];
     let first = 0;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
         firstDay.setDate(firstDay.getDate()+7*first);
         weeksDays[i] = new Date(firstDay);
         first = 1;
     }
 
     return (
-        weeksDays.map( (wd) => <Week weekDay={wd} key={wd.getDate()} data={props.data} clickHandler={props.clickHandler}/> )
+        <table>
+            <thead className='day-label'>
+                <tr>
+                    <td>mon</td>
+                    <td>tue</td>
+                    <td>wed</td>
+                    <td>thu</td>
+                    <td>fri</td>
+                    <td>sat</td>
+                    <td>sun</td>
+                </tr>
+            </thead>
+            <tbody>
+                {weeksDays.map( (wd) => <Week weekDay={wd} actualDay={props.actualDay} key={wd.getTime()} /> )}
+            </tbody>
+        </table>
     );
 }
 
