@@ -12,18 +12,30 @@ function Calendar(props){
     const [filteredData, setFilteredData] = useState([]);
     const [calendars, setCalendars]=useState([]);
     const [selectedItems, setSelectedItems]=useState([]);
-
-    let today = new Date();
-
     const [actualDay, setActualDay] = useState(new Date());
     const [monthView, setMonthView] = useState(true);
 
     function handleNextBtn(){
-        setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()+1, 1));
+        if(monthView){
+            setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()+1, 1));
+        }else{
+            // setActualDay(actualDay.setHours(7*24));
+            actualDay.setHours(7*24);
+            setActualDay(new Date(actualDay));
+            console.log(actualDay);
+        }
     }
 
     function handlePrevBtn(){
-        setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()-1, 1));
+        if(monthView){
+            setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()-1, 1));
+        }else{
+            // setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth(), actualDay.getUTCDay()-7));
+            // setActualDay(actualDay.setHours(-7*24));
+            actualDay.setHours(-7*24);
+            setActualDay(new Date(actualDay));
+            console.log(actualDay);
+        }
     }
 
     
@@ -33,7 +45,7 @@ function Calendar(props){
     if (monthView) {
         view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }else{
-        view = <WeekView actualDay={actualDay} />;
+        view = <WeekView actualDay={actualDay} data={filteredData} />;
     }
     
     const getData=(url,setX)=>{
