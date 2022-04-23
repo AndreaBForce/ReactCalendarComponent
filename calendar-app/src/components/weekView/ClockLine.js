@@ -5,7 +5,8 @@ const calculatePos = () => {
     let now = new Date();
     let res = (now.getHours()*60+now.getMinutes())/1440*100;
 
-    return res;
+    // return res-0.54 < 0? res: res-0.54;
+    return 0.6+4.12*5;
 }
 
 function ClockLine(){

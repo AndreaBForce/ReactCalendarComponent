@@ -5,7 +5,7 @@ const calculatePos = () => {
     let now = new Date();
     let res = (now.getHours()*60+now.getMinutes())/1440*100;
 
-    return res-0.44;
+    return res-0.94 < 0? res: res-0.94;
 }
 
 function Clock(){
