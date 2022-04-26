@@ -27,7 +27,7 @@ function WeekView(props){
         let minutes = parseInt(element.timeStart.substring(3,5));
         let res = (hours*60+minutes)/1440*100;
     
-        return res-0.54;
+        return res;
     }
 
     function calculateHeight(element){
@@ -40,8 +40,20 @@ function WeekView(props){
 
         res = res/1440*100;
 
-        return res < 1? 1:res;
+        return res < 0.5? 0.5:res;
     }
+
+    function hexToRgba(hex){
+        let r = parseInt(hex[1]+hex[1], 16),
+            g = parseInt(hex[2]+hex[2], 16),
+            b = parseInt(hex[3]+hex[3], 16);
+
+        return 'rgba('+r+', '+g+', '+b+', '+0.6+')';
+    }
+
+    props.calendars.forEach(element => {
+        hexToRgba(element.color);
+    });
 
     let firstDay = new Date(props.actualDay.getFullYear(), props.actualDay.getMonth(), 1);
 
@@ -55,7 +67,11 @@ function WeekView(props){
     let dayLabels = [];
     for (let i = 0; i < 7; i++) {
         weekEvents[i] = props.data.filter( (obj) => compareDate(obj.date, day1));
-        dayLabels.push(day1.toLocaleString('en-EN', {weekday: 'short', day: '2-digit'}))
+        if(day1.compare(new Date())){
+            dayLabels.push([day1.toLocaleString('en-EN', {weekday: 'short'}), <span className='day-number today'>{day1.toLocaleString('en-EN', {day:'2-digit'})}</span>])
+        }else{
+            dayLabels.push([day1.toLocaleString('en-EN', {weekday: 'short'}), <span className='day-number'>{day1.toLocaleString('en-EN', {day:'2-digit'})}</span>])
+        }
         day1.setDate(day1.getDate()+1);
     }
 
@@ -72,7 +88,7 @@ function WeekView(props){
 
     let cells = [];
     for(let i = 0; i < 7; i++){
-        cells.push(<div className='wv-day-div' key={i}>{weekEvents[i].map( (ev) => <div className='wv-event' key={ev.id} style={{top: `${calculatePos(ev)}%`, height: `${calculateHeight(ev)}%`}}>{ev.title}</div>)}{dailyCells}</div>);
+        cells.push(<div className='wv-day-div' key={i}>{weekEvents[i].map( (ev) => <div className='wv-event' key={ev.id} style={{top: `${calculatePos(ev)}%`, height: `${calculateHeight(ev)}%`, background: `${hexToRgba(props.calendars.find( (elem) => elem.name === ev.calendar).color)}`}}>{ev.title}</div>)}{dailyCells}</div>);
     }
 
     // console.log(weeksDays[0].toLocaleString('en-EN', {weekday: 'short'}));
@@ -81,7 +97,7 @@ function WeekView(props){
         <div className='wv-container'>
             <div className='wv-header'>
                 <div className='wv-header-labels'>
-                    {dayLabels.map( (dd,id) => <div key={id}>{dd}</div>)}
+                    {dayLabels.map( (dd,id) => <div className='wv-header-text' key={id}><span>{dd[0]} {dd[1]}</span></div>)}
                 </div>
             </div>
             <div className='wv-body'>

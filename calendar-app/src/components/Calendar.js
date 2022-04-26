@@ -45,7 +45,7 @@ function Calendar(props){
     if (monthView) {
         view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }else{
-        view = <WeekView actualDay={actualDay} data={filteredData} />;
+        view = <WeekView actualDay={actualDay} data={filteredData} calendars={calendars}/>;
     }
     
     const getData=(url,setX)=>{
@@ -112,17 +112,17 @@ function Calendar(props){
                         <button className='btn' onClick={ () => setMonthView(true)}>Month</button>
                     </div>
                     <div className='btn-group'>
-                        <button className='btn' onClick={handlePrevBtn}> &#60; </button>
+                        <button className='btn' onClick={handlePrevBtn}><i className='arrow arrow-left'></i></button>
                         <button className='btn' onClick={ () => setActualDay(new Date())}>Today</button>
-                        <button className='btn' onClick={handleNextBtn}> &#62; </button>
+                        <button className='btn' onClick={handleNextBtn}><i className='arrow arrow-right'></i></button>
                     </div>
                 </div>
-                <div>
+                <div className='view-content'>
                     {view}
                 </div>
             </div>
             <div className='search-container'>
-                <Search data={filteredData} search={props.search}></Search>
+                <Search data={filteredData} search={props.search} calendars={calendars}></Search>
             </div>
         </div>
     );
