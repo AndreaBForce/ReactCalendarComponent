@@ -15,7 +15,7 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     padding: 0px 2px 2px 2px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .day-number{

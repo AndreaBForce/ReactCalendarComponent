@@ -41,6 +41,23 @@ function Calendar(props){
     let monthName = actualDay.toLocaleString('en-EN', {month: 'long'}).toLowerCase();
     let yearText = actualDay.toLocaleString('en-EN', {year: 'numeric'}).toLowerCase();
     
+
+    //Uso per inizializzare i dati del calendario, controllo se da API o da locale
+    useEffect(()=>{
+        if(props.url_data !== undefined && props.url_calendars !== undefined){
+            getData(props.url_data,setFilteredData);
+            getData(props.url_data,setTotalData);
+            getData(props.url_calendars,setCalendars)
+            
+        }else if(props.data !== undefined && props.calendars !== undefined){
+            let data_local = props.data
+            setTotalData(data_local);
+            setFilteredData(data_local);
+            setCalendars(props.calendars);
+            handleCheckboxChange(null)
+        }
+    },[])
+
     let view;
     if (monthView) {
         view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
@@ -60,22 +77,11 @@ function Calendar(props){
           });
       }
 
-    //Uso per inizializzare i dati del calendario, controllo se da API o da locale
-    useEffect(()=>{
-        if(props.url_data !== undefined && props.url_calendars !== undefined){
-            getData(props.url_data,setFilteredData);
-            getData(props.url_data,setTotalData);
-            getData(props.url_calendars,setCalendars)
-        }else if(props.data !== undefined && props.calendar !== undefined){
-            setFilteredData(props.data);
-            setTotalData(props.data);
-            setCalendars(props.calendars);
-        }
-    },[])
     
     //Gestisce il click delle checkbox del calendario 
     //Filtra gli elementi presenti che verranno mostrati o meno
     const handleCheckboxChange = (item) => {
+        
         
         if(selectedItems.includes(item)){
             //Rimuove l'item nel selected Items
@@ -84,6 +90,8 @@ function Calendar(props){
             //Inserisce l'item nel selected items
             setSelectedItems(selectedItems => [...selectedItems,item] );
         }
+        
+        console.log(selectedItems)
     }  
 
     //Questo use effect, viene chiamato ogni volta che viene chiamato il set selected Items
