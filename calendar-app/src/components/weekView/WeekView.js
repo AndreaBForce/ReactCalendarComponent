@@ -38,22 +38,20 @@ function WeekView(props){
 
         let res = (endHours*60+endMinutes) - (startHours*60+startMinutes);
 
-        res = res/1440*100;
+        res = res/1440*100 - 0.2;
 
         return res < 0.5? 0.5:res;
     }
 
-    function hexToRgba(hex){
+    function hexToRgba(hex, alpha){
         let r = parseInt(hex[1]+hex[1], 16),
             g = parseInt(hex[2]+hex[2], 16),
             b = parseInt(hex[3]+hex[3], 16);
 
-        return 'rgba('+r+', '+g+', '+b+', '+0.6+')';
+        return 'rgba('+r+', '+g+', '+b+', '+alpha+')';
     }
 
-    props.calendars.forEach(element => {
-        hexToRgba(element.color);
-    });
+    let clickedAction = props.clickHandler;
 
     let firstDay = new Date(props.actualDay.getFullYear(), props.actualDay.getMonth(), 1);
 
@@ -88,10 +86,8 @@ function WeekView(props){
 
     let cells = [];
     for(let i = 0; i < 7; i++){
-        cells.push(<div className='wv-day-div' key={i}>{weekEvents[i].map( (ev) => <div className='wv-event' key={ev.id} style={{top: `${calculatePos(ev)}%`, height: `${calculateHeight(ev)}%`, background: `${hexToRgba(props.calendars.find( (elem) => elem.name === ev.calendar).color)}`}}>{ev.title}</div>)}{dailyCells}</div>);
+        cells.push(<div className='wv-day-div' key={i}>{weekEvents[i].map( (ev) => <div className='wv-event cursor-pointer' key={ev.id} onClick={() => clickedAction(ev)} style={{"--wv-event-top": `${calculatePos(ev)}%`, "--wv-event-height": `${calculateHeight(ev)}%`, "--wv-event-bg": `${hexToRgba(props.calendars.find( (elem) => elem.name === ev.calendar).color, 0.6)}`,"--wv-event-bg-hover": `${hexToRgba(props.calendars.find( (elem) => elem.name === ev.calendar).color, 0.8)}`}}>{ev.title}</div>)}{dailyCells}</div>);
     }
-
-    // console.log(weeksDays[0].toLocaleString('en-EN', {weekday: 'short'}));
     
     return (
         <div className='wv-container'>

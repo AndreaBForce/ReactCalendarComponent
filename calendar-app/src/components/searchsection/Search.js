@@ -47,7 +47,7 @@ function Search(props){
                 </button>
                 <input type="text" id='inP' placeholder="Type to Search..." className='search-input' onChange={event => search_items(event.target.value)}/>   
             </div>
-            <ResultList data={filterData} calendars={props.calendars} ></ResultList>
+            <ResultList data={filterData} clickHandler={props.clickHandler} calendars={props.calendars} ></ResultList>
         </div>
     );
 }

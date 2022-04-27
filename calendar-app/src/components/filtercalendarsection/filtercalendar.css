@@ -15,12 +15,13 @@
 }
 
 .cal-item{
+    background: var(--cal-item-bg);
     border-radius: 5px;
     padding: 4px;
 }
 
 .cal-item:hover{
-    background: var(--hover-color) !important;
+    background: var(--cal-item-bg-hover) !important;
 }
 
 .cal-label{

@@ -1,5 +1,5 @@
 .day-border{
-    border: 0.5px solid #cfcfcf;
+    border: 0.5px solid rgba(237, 237, 237, 0.782);
 }
 
 .day-td-cell{
@@ -23,7 +23,7 @@
 }
 
 .day-event{
-    /* background: rgba(241, 46, 46, 0.697); */
+    background: var(--day-event) !important;
     /* height: 30px; */
     border-radius: 5px;
     text-align: left;
@@ -32,8 +32,12 @@
     /* overflow-x: hidden; */
 }
 
+.day-event:hover{
+    background: var(--day-event-hover) !important;
+}
+
 .text-opaque{
-    color: rgb(130, 130, 130);
+    color: rgb(144, 144, 144);
 }
 
 .today{
@@ -42,4 +46,16 @@
     width: 20px;
     text-align: center;
     align-self: flex-end;
+    color: #fff;
+}
+
+@media screen and (prefers-color-scheme: dark){
+
+    .today{
+        color: #000;
+    }
+
+    .day-border{
+        border-color: rgb(79, 79, 79);
+    }
 }

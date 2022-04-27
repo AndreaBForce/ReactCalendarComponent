@@ -37,15 +37,15 @@ function Calendar(props){
             console.log(actualDay);
         }
     }
-
     
-    let monthTextual = actualDay.toLocaleString('en-EN', {month: 'long', year: 'numeric'}).toLowerCase();
+    let monthName = actualDay.toLocaleString('en-EN', {month: 'long'}).toLowerCase();
+    let yearText = actualDay.toLocaleString('en-EN', {year: 'numeric'}).toLowerCase();
+    
     let view;
-
     if (monthView) {
         view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }else{
-        view = <WeekView actualDay={actualDay} data={filteredData} calendars={calendars}/>;
+        view = <WeekView actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }
     
     const getData=(url,setX)=>{
@@ -58,20 +58,18 @@ function Calendar(props){
       }
 
     //Uso per inizializzare i dati del calendario, controllo se da API o da locale
-    //TODO: Testare il case se il socio ne mette uno dei due e basta
     useEffect(()=>{
         if(props.url_data !== undefined && props.url_calendars !== undefined){
             getData(props.url_data,setFilteredData);
             getData(props.url_data,setTotalData);
             getData(props.url_calendars,setCalendars)
-        }else if(props.data !== undefined && props.calendar){
+        }else if(props.data !== undefined && props.calendar !== undefined){
             setFilteredData(props.data);
             setTotalData(props.data);
             setCalendars(props.calendars);
         }
     },[])
     
-
     //Gestisce il click delle checkbox del calendario 
     //Filtra gli elementi presenti che verranno mostrati o meno
     const handleCheckboxChange = (item) => {
@@ -105,16 +103,16 @@ function Calendar(props){
             <div className='view-container'>
                 <div className='view-header'>
                     <div className='view-title'>
-                        <h1>{monthTextual}</h1>
+                        <h1>{monthName}<span> {yearText}</span></h1>
                     </div>
-                    <div className='btn-group'>
-                        <button className='btn' onClick={ () => setMonthView(false)}>Week</button>
-                        <button className='btn' onClick={ () => setMonthView(true)}>Month</button>
+                    <div className='cal-btn-group'>
+                        <button id='week-btn' className={monthView === false?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(false)}>Week</button>
+                        <button id='month-btn' className={monthView === true?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(true)}>Month</button>
                     </div>
-                    <div className='btn-group'>
-                        <button className='btn' onClick={handlePrevBtn}><i className='arrow arrow-left'></i></button>
-                        <button className='btn' onClick={ () => setActualDay(new Date())}>Today</button>
-                        <button className='btn' onClick={handleNextBtn}><i className='arrow arrow-right'></i></button>
+                    <div className='cal-btn-group'>
+                        <button className='cal-btn cal-btn-arrow' onClick={handlePrevBtn}><i className='arrow arrow-left'></i></button>
+                        <button className='cal-btn cal-btn-today' onClick={ () => setActualDay(new Date())}>Today</button>
+                        <button className='cal-btn cal-btn-arrow' onClick={handleNextBtn}><i className='arrow arrow-right'></i></button>
                     </div>
                 </div>
                 <div className='view-content'>
@@ -122,7 +120,7 @@ function Calendar(props){
                 </div>
             </div>
             <div className='search-container'>
-                <Search data={filteredData} search={props.search} calendars={calendars}></Search>
+                <Search data={filteredData} search={props.search} clickHandler={props.clickHandler} calendars={calendars}></Search>
             </div>
         </div>
     );

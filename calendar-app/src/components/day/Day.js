@@ -13,12 +13,12 @@ function Day(props){
           && this.getMonth() === d.getMonth();
     }
 
-    function hexToRgba(hex){
+    function hexToRgba(hex, alpha){
         let r = parseInt(hex[1]+hex[1], 16),
             g = parseInt(hex[2]+hex[2], 16),
             b = parseInt(hex[3]+hex[3], 16);
 
-        return 'rgba('+r+', '+g+', '+b+', '+0.6+')';
+        return 'rgba('+r+', '+g+', '+b+', '+alpha+')';
     }
 
     if(props.clickHandler != undefined){
@@ -36,8 +36,7 @@ function Day(props){
                     <span className={`day-number ${todayClass} ${thisMonthClass}`}>{props.day.getDate()} {monthName}</span>
                     {
                         props.daydata.map( (item,id) => (
-                            
-                            <div className='day-event' style={{background: `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color)}`}} key={id} onClick={() => clickedAction(item)} >{item.title.substring(0,11)}...</div>
+                            <div className='day-event cursor-pointer' style={{"--day-event": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 0.6)}`, "--day-event-hover":`${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 1)}`}} key={id} onClick={() => clickedAction(item)} >{item.title.substring(0,11)}...</div>
                         ))
                     }
                 </div>

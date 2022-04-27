@@ -16,7 +16,7 @@ function FilterCalendar(props){
             <h2>Calendars</h2>
             <div className='cal-list'>
             {props.calendars.map((item, id)=>(
-                <div key={id} className='cal-item' style={{background:`${hexToRgba(item.color, 0.6)}`, '--hover-color':`${hexToRgba(item.color, 1)}`}}>
+                <div key={id} className='cal-item' style={{"--cal-item-bg":`${hexToRgba(item.color, 0.6)}`, '--cal-item-bg-hover':`${hexToRgba(item.color, 1)}`}}>
                     <label className='cal-label'>
                         {item.name}
                         <input type="checkbox" className='cal-checkbox' value={item.name} onChange={()=> props.onHandleChange(item.name)} defaultChecked></input>

@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import React, {useState,useEffect} from 'react';
 import { Modal, Button } from "react-bootstrap";
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Calendar from './components/Calendar';
+import './App.css';
 
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
 
   return (
     <div>
-      {//<Calendar data={local_json} calendars={local_calendar}/>}
-      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler}/>}
+      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler}/>
+      <p></p>
+      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler}/>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

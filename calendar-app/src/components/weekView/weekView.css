@@ -53,6 +53,7 @@
     height: 100%;
     display: grid;
     grid-template-rows: repeat(25, 1fr); */
+    height: 2400px;
     text-align: right;
     position: relative;
     padding: 0px 10px 0px 0px;
@@ -64,14 +65,14 @@
     margin-top: 0px;
 }
 
+.wv-hours div:not(:first-child){
+    /* margin-top: 100px; */
+    height: 100px;
+}
+
 .wv-hours div:last-child{
     /* margin-top: 2px; */
     height: auto;
-}
-
-.wv-hours div{
-    /* margin-top: 100px; */
-    height: 101px;
 }
 
 .wv-content{
@@ -81,7 +82,7 @@
     position: relative;
     grid-template-columns: repeat(7, 1fr);
     /* grid-template-rows: repeat(2, 1fr); */
-    height: 2424px;
+    height: 2400px;
     margin-top: 7px;
     /* padding-bottom: 10px; */
 }
@@ -92,8 +93,8 @@
 
 .wv-clock{
     /* background: rgb(142, 255, 142); */
-    display: none;
-    color: darkcyan;
+    /* display: none; */
+    color: rgb(255, 0, 0);
     font-weight: bold;
     position: absolute;
     left: 32px;
@@ -101,9 +102,9 @@
 }
 
 .wv-clock-line{
-    display: none;
+    /* display: none; */
     position: absolute;
-    border-bottom: 1px solid darkcyan;
+    border-bottom: 1px solid rgb(255, 0, 0);
     width: 100%;
     z-index: 2;
 }
@@ -116,18 +117,31 @@
 }
 
 .wv-daily-cell{
-    height: 100px;
+    height: 99px;
 }
 
 .wv-event{
     position: absolute;
     font-size: 12px;
-    padding: 4px;
+    padding: 4px 4px 4px 4px;
     border-radius: 8px;
+    top: var(--wv-event-top) !important;
+    height: var(--wv-event-height) !important;
+    background: var(--wv-event-bg) !important;
     
     /* width: 85%; */
     left: 4px;
     right: 4px;
     overflow-y: hidden;
     /* height: 6.3%; */
+}
+
+.wv-event:hover{
+    background: var(--wv-event-bg-hover) !important;
+}
+
+@media screen and (prefers-color-scheme: dark){
+    .wv-header{
+        box-shadow: none;
+    }
 }
