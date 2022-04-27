@@ -3,7 +3,7 @@
     --bs-body-line-height: none;
 }
 
-h1,h2{
+h1,h2,h3,h4,h5{
     font-weight: bolder;
     display: block;
     margin-left: 0;
@@ -20,6 +20,18 @@ h2{
     font-size: 1.5em;
     margin-top: 0.83em;
     margin-bottom: 0.83em;
+}
+
+h3{
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+h4{
+    font-size: 1em;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
 }
 
 table{
@@ -40,7 +52,7 @@ table{
     top: 0;
     background: #fff;
     padding-bottom: 4px;
-    /* z-index: 2; */
+    z-index: 2;
 }
 
 .day-label td{
@@ -195,6 +207,10 @@ table{
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+.display-none{
+    display: none;
 }
 
 @media screen and (prefers-color-scheme: dark){

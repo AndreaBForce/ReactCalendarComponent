@@ -16,8 +16,11 @@ function ResultList(props){
         <div className='search-result'>
             {
             props.data.map((item)=>(
-            <div key={item.id} className='search-event cursor-pointer' onClick={() => clickedAction(item)} style={{"--sc-event-bg": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 0.6)}`,"--sc-event-bg-hover": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 1)}`}}>
-                {item.title}
+            <div key={item.id} className='sc-event cursor-pointer' onClick={() => clickedAction(item)} style={{"--sc-event-bg": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 0.6)}`,"--sc-event-bg-hover": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 1)}`}}>
+                {/* <p>Title</p> */}
+                <h4>{item.title}</h4>
+                <div className='sc-event-info'><span>Date:</span> {item.date}</div>
+                <div className='sc-event-info'><span>Time:</span> {item.timeStart}-{item.timeEnd}</div>
             </div>    
             ))
             }

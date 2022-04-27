@@ -33,10 +33,10 @@ function Day(props){
 
     let day = <td className='day-border day-td-cell'>
                 <div className='day-content'>
-                    <span className={`day-number ${todayClass} ${thisMonthClass}`}>{props.day.getDate()} {monthName}</span>
+                    <div className={`day-number ${thisMonthClass}`}><span className={`${todayClass}`}>{props.day.getDate()}</span> {monthName}</div>
                     {
                         props.daydata.map( (item,id) => (
-                            <div className='day-event cursor-pointer' style={{"--day-event": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 0.6)}`, "--day-event-hover":`${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 1)}`}} key={id} onClick={() => clickedAction(item)} >{item.title.substring(0,11)}...</div>
+                            <div className='day-event cursor-pointer' style={{"--day-event": `${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 0.6)}`, "--day-event-hover":`${hexToRgba(props.calendars.find( (elem) => elem.name === item.calendar).color, 1)}`}} key={id} onClick={() => clickedAction(item)} >{item.title}</div>
                         ))
                     }
                 </div>

@@ -66,9 +66,9 @@ function WeekView(props){
     for (let i = 0; i < 7; i++) {
         weekEvents[i] = props.data.filter( (obj) => compareDate(obj.date, day1));
         if(day1.compare(new Date())){
-            dayLabels.push([day1.toLocaleString('en-EN', {weekday: 'short'}), <span className='day-number today'>{day1.toLocaleString('en-EN', {day:'2-digit'})}</span>])
+            dayLabels.push([day1.toLocaleString('en-EN', {weekday: 'short'}), <span className='wv-day-number today'>{day1.toLocaleString('en-EN', {day:'2-digit'})}</span>])
         }else{
-            dayLabels.push([day1.toLocaleString('en-EN', {weekday: 'short'}), <span className='day-number'>{day1.toLocaleString('en-EN', {day:'2-digit'})}</span>])
+            dayLabels.push([day1.toLocaleString('en-EN', {weekday: 'short'}), <span className='wv-day-number'>{day1.toLocaleString('en-EN', {day:'2-digit'})}</span>])
         }
         day1.setDate(day1.getDate()+1);
     }

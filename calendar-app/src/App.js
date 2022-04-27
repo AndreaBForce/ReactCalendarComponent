@@ -27,9 +27,9 @@ function App() {
 
   return (
     <div>
-      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler}/>
+      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler} searchBar={true} week={true} month={true}/>
       <p></p>
-      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler}/>
+      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler} searchBar={false} week={true} month={false}/>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

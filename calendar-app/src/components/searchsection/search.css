@@ -83,15 +83,30 @@
     padding-right: 2px;
 }
 
-.search-event{
+.sc-event h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.sc-event{
     background: var(--sc-event-bg);
     margin-top: 4px;
     border-radius: 5px;
     padding: 4px;
 }
 
-.search-event:hover{
+.sc-event:hover{
     background: var(--sc-event-bg-hover);
+}
+
+.sc-event-info{
+    margin-top: 4px;
+}
+
+.sc-event-info span{
+    font-size: .9em;
+    font-weight: 600;
+    font-style: italic;
 }
 
 @media screen and (prefers-color-scheme: dark){

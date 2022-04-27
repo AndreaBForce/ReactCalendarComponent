@@ -32,6 +32,10 @@
     margin-bottom: 8px;
 }
 
+.wv-day-number{
+    padding: 4px;
+}
+
 .wv-header-text > span{
     align-self: flex-end;
 }
@@ -97,7 +101,7 @@
     color: rgb(255, 0, 0);
     font-weight: bold;
     position: absolute;
-    left: 32px;
+    left: 40%;
     z-index: 2;
 }
 
@@ -117,7 +121,7 @@
 }
 
 .wv-daily-cell{
-    height: 99px;
+    /* height: 99px; */
 }
 
 .wv-event{
@@ -128,7 +132,6 @@
     top: var(--wv-event-top) !important;
     height: var(--wv-event-height) !important;
     background: var(--wv-event-bg) !important;
-    
     /* width: 85%; */
     left: 4px;
     right: 4px;

@@ -13,7 +13,7 @@ function Calendar(props){
     const [calendars, setCalendars]=useState([]);
     const [selectedItems, setSelectedItems]=useState([]);
     const [actualDay, setActualDay] = useState(new Date());
-    const [monthView, setMonthView] = useState(true);
+    const [monthView, setMonthView] = useState(props.month === true?true:false);
 
     function handleNextBtn(){
         if(monthView){
@@ -47,6 +47,9 @@ function Calendar(props){
     }else{
         view = <WeekView actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }
+
+    let weekBtn = props.week === true?<button id='week-btn' className={monthView === false?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(false)}>Week</button>:'';
+    let monthBtn = props.month === true?<button id='month-btn' className={monthView === true?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(true)}>Month</button>:'';
     
     const getData=(url,setX)=>{
         fetch(url).then(function(response){
@@ -106,8 +109,8 @@ function Calendar(props){
                         <h1>{monthName}<span> {yearText}</span></h1>
                     </div>
                     <div className='cal-btn-group'>
-                        <button id='week-btn' className={monthView === false?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(false)}>Week</button>
-                        <button id='month-btn' className={monthView === true?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(true)}>Month</button>
+                        {weekBtn}
+                        {monthBtn}
                     </div>
                     <div className='cal-btn-group'>
                         <button className='cal-btn cal-btn-arrow' onClick={handlePrevBtn}><i className='arrow arrow-left'></i></button>
@@ -119,7 +122,7 @@ function Calendar(props){
                     {view}
                 </div>
             </div>
-            <div className='search-container'>
+            <div className={props.searchBar === false?'display-none':'search-container'} >
                 <Search data={filteredData} search={props.search} clickHandler={props.clickHandler} calendars={calendars}></Search>
             </div>
         </div>
