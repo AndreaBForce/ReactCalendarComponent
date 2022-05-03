@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Calendar from './components/Calendar';
@@ -10,7 +9,6 @@ function App() {
   const [showModal, setShow] = useState(false);
   const [itemModal,setItemModal] = useState([])
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const clickHandler = (item) => {
     setItemModal(item)
@@ -24,13 +22,12 @@ function App() {
   const api_search = 'https://supsi-events.herokuapp.com/bff/events?search=';
   const url_calendars = 'https://supsi-events.herokuapp.com/bff/calendars';
   const url_data = 'https://supsi-events.herokuapp.com/bff/events';
-  //<Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler}/>
-  //<Calendar data={local_json} calendars={local_calendar} clickHandler={clickHandler}/>
+
   return (
     <div>
       <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler} searchBar={true} week={true} month={true}/>
       <p></p>
-      <Calendar url_data={url_data} url_calendars={url_calendars} search={api_search} clickHandler={clickHandler} searchBar={false} week={true} month={false}/>
+      <Calendar data={local_json} calendars={local_calendar} clickHandler={clickHandler} searchBar={false} week={false} month={true}/>
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

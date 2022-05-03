@@ -15,6 +15,12 @@ function Calendar(props){
     const [actualDay, setActualDay] = useState(new Date());
     const [monthView, setMonthView] = useState(props.month === true?true:false);
 
+    Date.prototype.compare = function(d) {
+        return this.getFullYear() === d.getFullYear()
+          && this.getDate() === d.getDate()
+          && this.getMonth() === d.getMonth();
+    }
+
     function handleNextBtn(){
         if(monthView){
             setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()+1, 1));
@@ -30,12 +36,31 @@ function Calendar(props){
         if(monthView){
             setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()-1, 1));
         }else{
-            // setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth(), actualDay.getUTCDay()-7));
-            // setActualDay(actualDay.setHours(-7*24));
             actualDay.setHours(-7*24);
             setActualDay(new Date(actualDay));
             console.log(actualDay);
         }
+    }
+
+    function strToDate(str1){
+        var dt1   = parseInt(str1.substring(0,2));
+        var mon1  = parseInt(str1.substring(3,5));
+        var yr1   = parseInt(str1.substring(6,10));
+        var date1 = new Date(yr1, mon1-1, dt1);
+
+        return date1;
+    }
+
+    function compareEventsTime(a,b){
+        let dateA = strToDate(a.date);
+        let dateB = strToDate(b.date);
+
+        if(dateA > dateB){
+            return true;
+        }else if(dateA.compare(dateB)){
+            return a.timeStart > b.timeStart;
+        }
+        return false;
     }
     
     let monthName = actualDay.toLocaleString('en-EN', {month: 'long'}).toLowerCase();
@@ -60,7 +85,7 @@ function Calendar(props){
 
     let view;
     if (monthView) {
-        view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
+        view = <Month actualDay={actualDay} data={filteredData.sort(compareEventsTime)} clickHandler={props.clickHandler} calendars={calendars}/>;
     }else{
         view = <WeekView actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
     }
@@ -75,13 +100,12 @@ function Calendar(props){
           .then(function(myJson) {
             setX(myJson)
           });
-      }
+    }
 
     
     //Gestisce il click delle checkbox del calendario 
     //Filtra gli elementi presenti che verranno mostrati o meno
     const handleCheckboxChange = (item) => {
-        
         
         if(selectedItems.includes(item)){
             //Rimuove l'item nel selected Items
@@ -99,9 +123,8 @@ function Calendar(props){
         let temp_data = totalData;
 
         //Cicla su ogni calendario e filtra per ogni evento
-        //TODO MIGLIORARE CON OGGETTI
         selectedItems.forEach((element)=>{
-            temp_data = temp_data.filter((event_event)=> event_event.calendar != element);
+            temp_data = temp_data.filter((event_event)=> event_event.calendar !== element);
         });
         setFilteredData(temp_data);
     },[selectedItems])
@@ -131,7 +154,7 @@ function Calendar(props){
                 </div>
             </div>
             <div className={props.searchBar === false?'display-none':'search-container'} >
-                <Search data={filteredData} search={props.search} clickHandler={props.clickHandler} calendars={calendars}></Search>
+                <Search data={filteredData} sortFun={compareEventsTime} search={props.search} clickHandler={props.clickHandler} calendars={calendars}></Search>
             </div>
         </div>
     );

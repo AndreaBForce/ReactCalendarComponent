@@ -52,10 +52,6 @@
     border-radius: 5px;
 }
 
-/* .cal-label:hover input ~ .cal-checkmark{
-    background: rgb(157, 157, 157);
-} */
-
 .cal-label input:checked ~ .cal-checkmark{
     background: rgb(0, 102, 255);
 }

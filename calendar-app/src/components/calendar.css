@@ -39,9 +39,6 @@ table{
     width: 100%;
     min-width: 500px;
     position: relative;
-    /* height: 80vh; */
-    /* table-layout: fixed;
-    display: table; */
 }
 
 .day-label{
@@ -64,8 +61,6 @@ table{
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
-    /* padding-top: 16px; */
-    /* height: 80vh; */
     align-items: stretch;
 }
 
@@ -76,9 +71,7 @@ table{
 }
 
 .view-container{
-    /* background: green; */
     flex-grow: 6;
-    /* height: 80vh; */
 }
 
 .view-container h1{
@@ -92,7 +85,6 @@ table{
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    /* gap: 10px; */
     width: 100%;
     margin-bottom: 16px;
 }
@@ -199,10 +191,6 @@ table{
     max-width: 200px;
     padding-left: 2px;
     padding-right: 2px;
-    /* display: none; */
-    /* height: 80vh; */
-    /* overflow-y: scroll; */
-    /* flex-grow: 1; */
 }
 
 .cursor-pointer{

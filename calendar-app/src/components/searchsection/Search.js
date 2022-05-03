@@ -2,7 +2,6 @@ import './search.css';
 import ResultList from './ResultList';
 import React, {useState} from 'react';
 
-//TODO FIXARE LA SEARCH RICHIESTE SOSPESE PER IL ROBO
 function Search(props){
     const [query, setQuery] = useState("");
     const [filterData,setFilterData] = useState([]);
@@ -22,7 +21,7 @@ function Search(props){
             }
         }else{
             setFilterData(props.data.filter((element) => {
-                //if no input the return the original
+                //if no input then return the original
                 if (props.input === '') {
                     return false;
                 }else {
@@ -47,7 +46,7 @@ function Search(props){
                 </button>
                 <input type="text" id='inP' placeholder="Type to Search..." className='search-input' onChange={event => search_items(event.target.value)}/>   
             </div>
-            <ResultList data={filterData} clickHandler={props.clickHandler} calendars={props.calendars} ></ResultList>
+            <ResultList data={filterData.sort(props.sortFun)} clickHandler={props.clickHandler} calendars={props.calendars} ></ResultList>
         </div>
     );
 }

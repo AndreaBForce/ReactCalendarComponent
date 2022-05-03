@@ -18,10 +18,8 @@
 
 .wv-header-labels{
     grid-area: labels;
-    /* background: rgb(0, 128, 124); */
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    /* box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.68); */
 }
 
 .wv-header-text{
@@ -53,10 +51,6 @@
 
 .wv-hours{
     grid-area: hours;
-    /* background: rgb(217, 0, 255);
-    height: 100%;
-    display: grid;
-    grid-template-rows: repeat(25, 1fr); */
     height: 2400px;
     text-align: right;
     position: relative;
@@ -70,25 +64,20 @@
 }
 
 .wv-hours div:not(:first-child){
-    /* margin-top: 100px; */
     height: 100px;
 }
 
 .wv-hours div:last-child{
-    /* margin-top: 2px; */
     height: auto;
 }
 
 .wv-content{
     grid-area: content;
-    /* background: rgb(0, 255, 247); */
     display: grid;
     position: relative;
     grid-template-columns: repeat(7, 1fr);
-    /* grid-template-rows: repeat(2, 1fr); */
     height: 2400px;
     margin-top: 7px;
-    /* padding-bottom: 10px; */
 }
 
 .wv-day-div:nth-child(2) div{
@@ -96,8 +85,6 @@
 }
 
 .wv-clock{
-    /* background: rgb(142, 255, 142); */
-    /* display: none; */
     color: rgb(255, 0, 0);
     font-weight: bold;
     position: absolute;
@@ -106,7 +93,6 @@
 }
 
 .wv-clock-line{
-    /* display: none; */
     position: absolute;
     border-bottom: 1px solid rgb(255, 0, 0);
     width: 100%;
@@ -120,10 +106,6 @@
     position: relative;
 }
 
-.wv-daily-cell{
-    /* height: 99px; */
-}
-
 .wv-event{
     position: absolute;
     font-size: 12px;
@@ -132,11 +114,9 @@
     top: var(--wv-event-top) !important;
     height: var(--wv-event-height) !important;
     background: var(--wv-event-bg) !important;
-    /* width: 85%; */
     left: 4px;
     right: 4px;
     overflow-y: hidden;
-    /* height: 6.3%; */
 }
 
 .wv-event:hover{

@@ -15,7 +15,7 @@ function Week(props){
     }
 
     //Funzione che mi ritorna una date indipedentemente dal separatore
-    function compareDate(str1){
+    function strToDate(str1){
         // str1 format should be dd/mm/yyyy. Separator can be anything e.g. / or -. It wont effect
         //fonte https://stackoverflow.com/questions/8224459/how-to-create-a-date-object-from-string-in-javascript
         var dt1   = parseInt(str1.substring(0,2));
@@ -30,7 +30,7 @@ function Week(props){
             {days.map( (d) => <Day day={d} key={d.getTime()} actualDay={props.actualDay}
             daydata={
                 props.data.filter((element)=>{
-                    return  compareDate(element.date).getTime() == d.getTime();
+                    return  strToDate(element.date).getTime() === d.getTime();
                 })} clickHandler={props.clickHandler} calendars={props.calendars}/> )}
         </tr>
     );

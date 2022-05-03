@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Clock from './Clock'
 import ClockLine from './ClockLine';
 import "../day/day.css"
