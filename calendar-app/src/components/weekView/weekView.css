@@ -10,17 +10,32 @@
 
 .wv-header{
     grid-area: header;
-    background: red;
     display: grid;
     grid-template-columns: 1fr 12fr;
     grid-template-areas: ". labels";
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.68);
 }
 
 .wv-header-labels{
     grid-area: labels;
-    background: rgb(0, 128, 124);
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+}
+
+.wv-header-text{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.wv-day-number{
+    padding: 4px;
+}
+
+.wv-header-text > span{
+    align-self: flex-end;
 }
 
 .wv-body{
@@ -30,11 +45,13 @@
     grid-template-rows: auto;
     grid-template-areas: "hours content";
     overflow-y: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .wv-hours{
     grid-area: hours;
-    /* background: rgb(217, 0, 255); */
+    height: 2400px;
     text-align: right;
     position: relative;
     padding: 0px 10px 0px 0px;
@@ -46,22 +63,21 @@
     margin-top: 0px;
 }
 
-.wv-hours div:nth-child(2){
-    margin-top: 2px;
+.wv-hours div:not(:first-child){
+    height: 100px;
 }
 
-.wv-hours div{
-    margin-top: 50px;
+.wv-hours div:last-child{
+    height: auto;
 }
 
 .wv-content{
     grid-area: content;
-    /* background: rgb(0, 255, 247); */
     display: grid;
     position: relative;
     grid-template-columns: repeat(7, 1fr);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 2400px;
+    margin-top: 7px;
 }
 
 .wv-day-div:nth-child(2) div{
@@ -69,17 +85,16 @@
 }
 
 .wv-clock{
-    /* background: rgb(142, 255, 142); */
-    color: darkcyan;
+    color: rgb(255, 0, 0);
     font-weight: bold;
     position: absolute;
-    left: 32px;
+    left: 40%;
     z-index: 2;
 }
 
 .wv-clock-line{
     position: absolute;
-    border-bottom: 1px solid darkcyan;
+    border-bottom: 1px solid rgb(255, 0, 0);
     width: 100%;
     z-index: 2;
 }
@@ -91,19 +106,25 @@
     position: relative;
 }
 
-.wv-daily-cell{
-    height: 64px;
-}
-
 .wv-event{
     position: absolute;
     font-size: 12px;
-    background: rgba(249, 69, 69, 0.653);
-    padding: 4px;
+    padding: 4px 4px 4px 4px;
     border-radius: 8px;
-    /* width: 85%; */
+    top: var(--wv-event-top) !important;
+    height: var(--wv-event-height) !important;
+    background: var(--wv-event-bg) !important;
     left: 4px;
     right: 4px;
     overflow-y: hidden;
-    /* height: 6.3%; */
+}
+
+.wv-event:hover{
+    background: var(--wv-event-bg-hover) !important;
+}
+
+@media screen and (prefers-color-scheme: dark){
+    .wv-header{
+        box-shadow: none;
+    }
 }

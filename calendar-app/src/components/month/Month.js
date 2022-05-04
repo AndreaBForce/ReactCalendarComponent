@@ -20,13 +20,13 @@ function Month(props){
         <table>
             <thead className='day-label'>
                 <tr>
-                    <td>mon</td>
-                    <td>tue</td>
-                    <td>wed</td>
-                    <td>thu</td>
-                    <td>fri</td>
-                    <td>sat</td>
-                    <td>sun</td>
+                    <td>Mon</td>
+                    <td>Tue</td>
+                    <td>Wed</td>
+                    <td>Thu</td>
+                    <td>Fri</td>
+                    <td>Sat</td>
+                    <td>Sun</td>
                 </tr>
             </thead>
             <tbody>

@@ -13,7 +13,13 @@ function Calendar(props){
     const [calendars, setCalendars]=useState([]);
     const [selectedItems, setSelectedItems]=useState([]);
     const [actualDay, setActualDay] = useState(new Date());
-    const [monthView, setMonthView] = useState(true);
+    const [monthView, setMonthView] = useState(props.month === true?true:false);
+
+    Date.prototype.compare = function(d) {
+        return this.getFullYear() === d.getFullYear()
+          && this.getDate() === d.getDate()
+          && this.getMonth() === d.getMonth();
+    }
 
     function handleNextBtn(){
         if(monthView){
@@ -30,23 +36,62 @@ function Calendar(props){
         if(monthView){
             setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth()-1, 1));
         }else{
-            // setActualDay(new Date(actualDay.getFullYear(), actualDay.getMonth(), actualDay.getUTCDay()-7));
-            // setActualDay(actualDay.setHours(-7*24));
             actualDay.setHours(-7*24);
             setActualDay(new Date(actualDay));
             console.log(actualDay);
         }
     }
 
-    
-    let monthTextual = actualDay.toLocaleString('en-EN', {month: 'long', year: 'numeric'}).toLowerCase();
-    let view;
+    function strToDate(str1){
+        var dt1   = parseInt(str1.substring(0,2));
+        var mon1  = parseInt(str1.substring(3,5));
+        var yr1   = parseInt(str1.substring(6,10));
+        var date1 = new Date(yr1, mon1-1, dt1);
 
-    if (monthView) {
-        view = <Month actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
-    }else{
-        view = <WeekView actualDay={actualDay} data={filteredData} />;
+        return date1;
     }
+
+    function compareEventsTime(a,b){
+        let dateA = strToDate(a.date);
+        let dateB = strToDate(b.date);
+
+        if(dateA > dateB){
+            return true;
+        }else if(dateA.compare(dateB)){
+            return a.timeStart > b.timeStart;
+        }
+        return false;
+    }
+    
+    let monthName = actualDay.toLocaleString('en-EN', {month: 'long'}).toLowerCase();
+    let yearText = actualDay.toLocaleString('en-EN', {year: 'numeric'}).toLowerCase();
+    
+
+    //Uso per inizializzare i dati del calendario, controllo se da API o da locale
+    useEffect(()=>{
+        if(props.url_data !== undefined && props.url_calendars !== undefined){
+            getData(props.url_data,setFilteredData);
+            getData(props.url_data,setTotalData);
+            getData(props.url_calendars,setCalendars)
+            
+        }else if(props.data !== undefined && props.calendars !== undefined){
+            let data_local = props.data
+            setTotalData(data_local);
+            setFilteredData(data_local);
+            setCalendars(props.calendars);
+            handleCheckboxChange(null)
+        }
+    },[])
+
+    let view;
+    if (monthView) {
+        view = <Month actualDay={actualDay} data={filteredData.sort(compareEventsTime)} clickHandler={props.clickHandler} calendars={calendars}/>;
+    }else{
+        view = <WeekView actualDay={actualDay} data={filteredData} clickHandler={props.clickHandler} calendars={calendars}/>;
+    }
+
+    let weekBtn = props.week === true?<button id='week-btn' className={monthView === false?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(false)}>Week</button>:'';
+    let monthBtn = props.month === true?<button id='month-btn' className={monthView === true?'cal-btn cal-btn-active':'cal-btn'} onClick={ () => setMonthView(true)}>Month</button>:'';
     
     const getData=(url,setX)=>{
         fetch(url).then(function(response){
@@ -55,23 +100,9 @@ function Calendar(props){
           .then(function(myJson) {
             setX(myJson)
           });
-      }
+    }
 
-    //Uso per inizializzare i dati del calendario, controllo se da API o da locale
-    //TODO: Testare il case se il socio ne mette uno dei due e basta
-    useEffect(()=>{
-        if(props.url_data !== undefined && props.url_calendars !== undefined){
-            getData(props.url_data,setFilteredData);
-            getData(props.url_data,setTotalData);
-            getData(props.url_calendars,setCalendars)
-        }else if(props.data !== undefined && props.calendar){
-            setFilteredData(props.data);
-            setTotalData(props.data);
-            setCalendars(props.calendars);
-        }
-    },[])
     
-
     //Gestisce il click delle checkbox del calendario 
     //Filtra gli elementi presenti che verranno mostrati o meno
     const handleCheckboxChange = (item) => {
@@ -83,6 +114,8 @@ function Calendar(props){
             //Inserisce l'item nel selected items
             setSelectedItems(selectedItems => [...selectedItems,item] );
         }
+        
+        console.log(selectedItems)
     }  
 
     //Questo use effect, viene chiamato ogni volta che viene chiamato il set selected Items
@@ -90,9 +123,8 @@ function Calendar(props){
         let temp_data = totalData;
 
         //Cicla su ogni calendario e filtra per ogni evento
-        //TODO MIGLIORARE CON OGGETTI
         selectedItems.forEach((element)=>{
-            temp_data = temp_data.filter((event_event)=> event_event.calendar != element);
+            temp_data = temp_data.filter((event_event)=> event_event.calendar !== element);
         });
         setFilteredData(temp_data);
     },[selectedItems])
@@ -105,24 +137,24 @@ function Calendar(props){
             <div className='view-container'>
                 <div className='view-header'>
                     <div className='view-title'>
-                        <h1>{monthTextual}</h1>
+                        <h1>{monthName}<span> {yearText}</span></h1>
                     </div>
-                    <div className='btn-group'>
-                        <button className='btn' onClick={ () => setMonthView(false)}>Week</button>
-                        <button className='btn' onClick={ () => setMonthView(true)}>Month</button>
+                    <div className='cal-btn-group'>
+                        {weekBtn}
+                        {monthBtn}
                     </div>
-                    <div className='btn-group'>
-                        <button className='btn' onClick={handlePrevBtn}> &#60; </button>
-                        <button className='btn' onClick={ () => setActualDay(new Date())}>Today</button>
-                        <button className='btn' onClick={handleNextBtn}> &#62; </button>
+                    <div className='cal-btn-group'>
+                        <button className='cal-btn cal-btn-arrow' onClick={handlePrevBtn}><i className='arrow arrow-left'></i></button>
+                        <button className='cal-btn cal-btn-today' onClick={ () => setActualDay(new Date())}>Today</button>
+                        <button className='cal-btn cal-btn-arrow' onClick={handleNextBtn}><i className='arrow arrow-right'></i></button>
                     </div>
                 </div>
-                <div>
+                <div className='view-content'>
                     {view}
                 </div>
             </div>
-            <div className='search-container'>
-                <Search data={filteredData} search={props.search}></Search>
+            <div className={props.searchBar === false?'display-none':'search-container'} >
+                <Search data={filteredData} sortFun={compareEventsTime} search={props.search} clickHandler={props.clickHandler} calendars={calendars}></Search>
             </div>
         </div>
     );
